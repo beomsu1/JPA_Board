@@ -2,6 +2,7 @@ package org.bs.jpa.domain;
 
 import java.time.LocalDateTime;
 
+import org.bs.jpa.dto.board.BoardDTO;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -46,6 +47,18 @@ public class Board {
 
         this.title = title;
         this.content = content;
+
+    }
+
+    // Entity -> BoardDTO
+    public void dtoTOEntity(BoardDTO boardDTO){
+
+        this.bno = boardDTO.getBno();
+        this.title = boardDTO.getTitle();
+        this.content = boardDTO.getContent();
+        this.writer = boardDTO.getWriter();
+        this.regDate = boardDTO.getRegDate();
+        this.modDate = boardDTO.getModDate();
 
     }
 
