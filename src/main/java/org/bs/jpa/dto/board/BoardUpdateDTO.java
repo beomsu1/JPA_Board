@@ -17,7 +17,7 @@ public class BoardUpdateDTO {
     private String title;
     private String content;
 
-    public void BoardUpdate(Board board){
+    public void boardUpdate(Board board){
 
         board.update(title, content);
     }

@@ -1,7 +1,5 @@
 package org.bs.jpa.service;
 
-import java.util.Optional;
-
 import org.bs.jpa.domain.Board;
 import org.bs.jpa.dto.board.BoardCreateDTO;
 import org.bs.jpa.dto.board.BoardDTO;
@@ -76,7 +74,7 @@ public class BoardServiceTests {
        Board board = new Board();
        board.dtoTOEntity(boardDTO);
 
-       boardUpdateDTO.BoardUpdate(board);
+       boardUpdateDTO.boardUpdate(board);
        boardService.boardUpdate(boardUpdateDTO);
 
        // Then
