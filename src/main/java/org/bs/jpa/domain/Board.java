@@ -66,7 +66,7 @@ public class Board {
     }
 
     // 수정 후 시간 포맷 변경
-    @PreUpdate
+    @PreUpdate // 엔티티가 변경될 때 실행
     public void onPreUpdate() {
 
         // 현재 날짜와 시간 가져오기
