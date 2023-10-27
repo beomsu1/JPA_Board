@@ -1,6 +1,8 @@
 package org.bs.jpa.domain;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import org.bs.jpa.dto.board.BoardDTO;
 import org.springframework.data.annotation.CreatedDate;
@@ -12,6 +14,8 @@ import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -37,10 +41,23 @@ public class Board {
     private String writer;
 
     @CreatedDate // 생성시간 기준
-    private LocalDateTime regDate;
+    private String regDate;
 
     @LastModifiedDate // 수정시간 기준
-    private LocalDateTime modDate;
+    private String modDate;
+
+    // 생성 시간 포맷 변경
+    @PrePersist
+    public void onPrePersist(){
+        this.regDate = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss").format(LocalDateTime.now());
+        this.modDate = this.regDate;
+    }
+
+    // 수정 후 시간 포맷 변경
+    @PreUpdate
+    public void onPreUpdate(){
+        this.modDate = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss").format(LocalDateTime.now());
+    }
 
     // Board Update Method
     public void update(String title, String content){

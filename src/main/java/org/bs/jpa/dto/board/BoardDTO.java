@@ -21,11 +21,8 @@ public class BoardDTO {
     private String title;
     private String content;
     private String writer;
-
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime regDate;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime modDate;
+    private String regDate;
+    private String modDate;
 
     // Board(Entity) -> BoardDTO 
     public void BoardToBoardDTO(Board board){
