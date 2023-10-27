@@ -1,10 +1,6 @@
 package org.bs.jpa.dto.board;
 
-import java.time.LocalDateTime;
-
 import org.bs.jpa.domain.Board;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

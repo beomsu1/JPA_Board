@@ -2,6 +2,7 @@ package org.bs.jpa.domain;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 import org.bs.jpa.dto.board.BoardDTO;
@@ -32,7 +33,7 @@ import lombok.ToString;
 @ToString
 @EntityListeners(AuditingEntityListener.class) // 생명주기 이벤트를 리스닝하기 위해 사용
 public class Board {
-    
+
     @Id // primary
     @GeneratedValue(strategy = GenerationType.IDENTITY) // AutoIncrement
     private Long bno;
@@ -48,19 +49,40 @@ public class Board {
 
     // 생성 시간 포맷 변경
     @PrePersist
-    public void onPrePersist(){
-        this.regDate = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss").format(LocalDateTime.now());
+    public void onPrePersist() {
+
+        // 현재 날짜와 시간 가져오기
+        LocalDateTime currentDateTime = LocalDateTime.now();
+
+        // 사용할 형식 지정 (날짜, 오후/오전, 시간)
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd a h:mm");
+
+        // 날짜와 시간을 문자열로 형식화
+        String formattedDateTime = currentDateTime.format(formatter);
+
+        // 날짜와 시간을 저장
+        this.regDate = formattedDateTime;
         this.modDate = this.regDate;
     }
 
     // 수정 후 시간 포맷 변경
     @PreUpdate
-    public void onPreUpdate(){
-        this.modDate = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss").format(LocalDateTime.now());
+    public void onPreUpdate() {
+
+        // 현재 날짜와 시간 가져오기
+        LocalDateTime currentDateTime = LocalDateTime.now();
+
+        // 사용할 형식 지정 (날짜, 오후/오전, 시간)
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd a h:mm");
+
+        // 날짜와 시간을 문자열로 형식화
+        String formattedDateTime = currentDateTime.format(formatter);
+
+        this.modDate = formattedDateTime;
     }
 
     // Board Update Method
-    public void update(String title, String content){
+    public void update(String title, String content) {
 
         this.title = title;
         this.content = content;
@@ -68,7 +90,7 @@ public class Board {
     }
 
     // Entity -> BoardDTO
-    public void dtoTOEntity(BoardDTO boardDTO){
+    public void dtoTOEntity(BoardDTO boardDTO) {
 
         this.bno = boardDTO.getBno();
         this.title = boardDTO.getTitle();
