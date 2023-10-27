@@ -5,8 +5,14 @@ import java.util.Optional;
 import org.bs.jpa.domain.Board;
 import org.bs.jpa.dto.board.BoardCreateDTO;
 import org.bs.jpa.dto.board.BoardDTO;
+import org.bs.jpa.dto.board.BoardListDTO;
 import org.bs.jpa.dto.board.BoardUpdateDTO;
 import org.bs.jpa.repository.BoardRepository;
+import org.bs.jpa.util.Page.PageResponseDTO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -46,7 +52,7 @@ public class BoardServiceImpl implements BoardService{
         Optional<Board> info =  boardRepository.findById(boardUpdateDTO.getBno());
         Board board = info.orElseThrow();
 
-        boardUpdateDTO.BoardUpdate(board);
+        boardUpdateDTO.boardUpdate(board);
         boardRepository.save(board);
 
     }
@@ -56,6 +62,20 @@ public class BoardServiceImpl implements BoardService{
     public void boardDelete(Long bno) {
 
         boardRepository.deleteById(bno);
+    }
+
+    @Override
+    public PageResponseDTO<BoardListDTO> boardList(PageRequest pageRequest) {
+
+        Pageable pageable = PageRequest.of(0, 10, Sort.by("bno").descending());
+
+         boardRepository.findAll(pageable);
+
+         return null;
+
+        
+        
+
     }
     
 }
