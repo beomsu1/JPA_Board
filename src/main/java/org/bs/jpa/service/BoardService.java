@@ -4,8 +4,8 @@ import org.bs.jpa.dto.board.BoardCreateDTO;
 import org.bs.jpa.dto.board.BoardDTO;
 import org.bs.jpa.dto.board.BoardListDTO;
 import org.bs.jpa.dto.board.BoardUpdateDTO;
+import org.bs.jpa.util.Page.PageRequestDTO;
 import org.bs.jpa.util.Page.PageResponseDTO;
-import org.springframework.data.domain.PageRequest;
 
 import jakarta.transaction.Transactional;
 
@@ -25,6 +25,6 @@ public interface BoardService {
     void boardDelete (Long bno);
 
     // List
-    PageResponseDTO<BoardListDTO> boardList (PageRequest pageRequest);
+    PageResponseDTO<BoardListDTO> boardList (PageRequestDTO pageRequestDTO);
     
 }

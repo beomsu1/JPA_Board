@@ -33,6 +33,8 @@ public class BoardRepositoryTests {
     public void boardCreateTest() {
 
         // Given
+        log.info("board Create Repository Test Start");
+
         BoardCreateDTO boardCreateDTO = BoardCreateDTO.builder()
                 .title("테스트입니다.")
                 .content("테스트 내용입니다.")
@@ -45,7 +47,7 @@ public class BoardRepositoryTests {
         // Then
         assertNotNull(board); // 게시물 notNull 확인
         assertEquals(board.getTitle(), boardCreateDTO.getTitle());
-        log.info("Board Create Complete");
+        log.info("Board Create Repository Test Complete");
     }
 
     // BoardRead
@@ -54,6 +56,7 @@ public class BoardRepositoryTests {
     public void boardReadTest() {
 
         // Given
+        log.info("board Read Repository Test Start");
         Long bno = 11L;
 
         // When
@@ -62,6 +65,7 @@ public class BoardRepositoryTests {
 
         // Then
         log.info(board);
+        log.info("Board Read Repository Test Complete");
 
     }
 
@@ -71,6 +75,8 @@ public class BoardRepositoryTests {
     public void boardUpdateTest() {
 
         // given
+        log.info("board Update Repository Test Start");
+
         Long bno = 1L;
         String newTitle = "안녕하세요 테스트입니다.";
         String newContent = "반갑습니다 테스트입니다.";
@@ -94,7 +100,7 @@ public class BoardRepositoryTests {
         assertEquals(newTitle, board.getTitle());
         assertEquals(newContent, board.getContent());
 
-        log.info("Board Update Complete");
+        log.info("Board Update Repository Test Complete");
     }
 
     // BoardDelete
@@ -103,13 +109,15 @@ public class BoardRepositoryTests {
     public void boardDeleteTest() {
 
         // Given
+        log.info("board Delete Repository Test Start");
+
         Long bno = 2L;
 
         // When
         boardRepository.deleteById(bno);
 
         // Then
-        log.info("Board Delete Complete");
+        log.info("Board Delete Repository Test Complete");
 
     }
 
@@ -119,6 +127,7 @@ public class BoardRepositoryTests {
     public void boardListTest() {
 
         // Given
+        log.info("board List Repository Test Start");
 
         // when
         Pageable pageable = PageRequest.of(0, 10, Sort.by("bno").descending());
@@ -133,6 +142,8 @@ public class BoardRepositoryTests {
         log.info("--------------------");
 
         log.info("리스트: " + list);
+
+        log.info("Board List Repository Test Complete");
     }
 
 }

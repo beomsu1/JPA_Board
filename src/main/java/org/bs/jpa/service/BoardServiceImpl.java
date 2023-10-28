@@ -8,17 +8,16 @@ import org.bs.jpa.dto.board.BoardDTO;
 import org.bs.jpa.dto.board.BoardListDTO;
 import org.bs.jpa.dto.board.BoardUpdateDTO;
 import org.bs.jpa.repository.BoardRepository;
+import org.bs.jpa.util.Page.PageRequestDTO;
 import org.bs.jpa.util.Page.PageResponseDTO;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 
 @Service
 @RequiredArgsConstructor
+@Log4j2
 public class BoardServiceImpl implements BoardService{
 
     private final BoardRepository boardRepository;
@@ -26,12 +25,16 @@ public class BoardServiceImpl implements BoardService{
     // Create
     @Override
     public void boardCreate(BoardCreateDTO boardCreateDTO) {
+
+        log.info("boardCreate ServiceImpl....");
         boardRepository.save(boardCreateDTO.toEntity());
     }
 
     // Read
     @Override
     public BoardDTO boardReadOne(Long bno) {
+
+        log.info("boardReadOne ServiceImpl....");
 
         Optional<Board> info = boardRepository.findById(bno);
 
@@ -49,6 +52,8 @@ public class BoardServiceImpl implements BoardService{
     @Override
     public void boardUpdate(BoardUpdateDTO boardUpdateDTO) {
 
+        log.info("boardUpdate ServiceImpl....");
+
         Optional<Board> info =  boardRepository.findById(boardUpdateDTO.getBno());
         Board board = info.orElseThrow();
 
@@ -61,21 +66,18 @@ public class BoardServiceImpl implements BoardService{
     @Override
     public void boardDelete(Long bno) {
 
+        log.info("boardDelete ServiceImpl....");
+
         boardRepository.deleteById(bno);
     }
 
+    // List
     @Override
-    public PageResponseDTO<BoardListDTO> boardList(PageRequest pageRequest) {
+    public PageResponseDTO<BoardListDTO> boardList(PageRequestDTO pageRequestDTO) {
 
-        Pageable pageable = PageRequest.of(0, 10, Sort.by("bno").descending());
+        log.info("boardList ServiceImpl....");
 
-         boardRepository.findAll(pageable);
-
-         return null;
-
-        
-        
-
+        return boardRepository.boardList(pageRequestDTO);
     }
     
 }
