@@ -30,9 +30,9 @@ public class BoardServiceTests {
         log.info("Board Create Service Test Start");
 
         BoardCreateDTO boardCreateDTO = BoardCreateDTO.builder()
-                .title("sujung")
-                .content("song")
-                .writer("song su jung")
+                .title("test1")
+                .content("test1")
+                .writer("test")
                 .build();
 
         // When
@@ -51,7 +51,7 @@ public class BoardServiceTests {
         // Given
         log.info("Board Read Service Test Start");
 
-        Long bno = 3L;
+        Long bno = 1L;
 
         // When
         BoardDTO boardDTO = boardService.boardReadOne(bno);
@@ -71,7 +71,7 @@ public class BoardServiceTests {
         log.info("Board Update Service Test Start");
 
         BoardUpdateDTO boardUpdateDTO = BoardUpdateDTO.builder()
-                .bno(3L)
+                .bno(1L)
                 .title("수정")
                 .content("수정")
                 .build();
@@ -117,7 +117,7 @@ public class BoardServiceTests {
         log.info("Board List Service Test Start");
 
         String type = "tcw";
-        String keyword = "수정";
+        String keyword = "test";
 
         // When
         PageRequestDTO pageRequestDTO = PageRequestDTO.builder()

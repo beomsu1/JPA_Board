@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 @Data
 public class BoardCreateDTO {
 
-    private Long bno;
     private String title;
     private String content;
     private String writer;
