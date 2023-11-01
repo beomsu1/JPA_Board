@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class CommentUpdateDTO {
 
+    private Long cno;
     private String comments;
     private String commeters;
     private boolean updateFlag;

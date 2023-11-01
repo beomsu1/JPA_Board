@@ -1,5 +1,7 @@
 package org.bs.jpa.dto.comment;
 
+import org.bs.jpa.domain.Comment;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,4 +21,15 @@ public class CommentDTO {
     private boolean deleteFlag;
     private boolean updateFlag;
 
+
+    // Entity -> DTO
+    public void entityToDTO (Comment comment){
+        this.bno = comment.board.getBno();
+        this.cno = comment.getCno();
+        this.commnets = comment.getComments();
+        this.commenter = comment.getCommenter();
+        this.regDate = comment.getRegDate();
+        this.deleteFlag = comment.isDeleteFlag();
+        this.updateFlag = comment.isUpdateFlag();
+    }
 }

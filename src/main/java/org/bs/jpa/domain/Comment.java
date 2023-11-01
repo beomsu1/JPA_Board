@@ -3,6 +3,7 @@ package org.bs.jpa.domain;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import org.bs.jpa.dto.comment.CommentDTO;
 import org.bs.jpa.dto.comment.CommentUpdateDTO;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -76,6 +77,22 @@ public class Comment {
         this.comments = "DELETE";
         this.commenter = "DELETE";
         this.deleteFlag = true;
+    }
+
+    // DTO -> Entity
+    public Comment dtoTOEntity(CommentDTO commentDTO){
+
+        Comment comment = Comment.builder()
+        .cno(commentDTO.getCno())
+        .comments(commentDTO.getCommnets())
+        .commenter(commentDTO.getCommenter())
+        .regDate(commentDTO.getRegDate())
+        .deleteFlag(commentDTO.isDeleteFlag())
+        .updateFlag(commentDTO.isUpdateFlag())
+        .build(); 
+
+        return comment;
+
     }
 
 }
