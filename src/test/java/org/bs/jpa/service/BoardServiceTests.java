@@ -72,18 +72,11 @@ public class BoardServiceTests {
 
         BoardUpdateDTO boardUpdateDTO = BoardUpdateDTO.builder()
                 .bno(1L)
-                .title("수정")
-                .content("수정")
+                .title("update Title")
+                .content("범수")
                 .build();
 
         // When
-        BoardDTO boardDTO = boardService.boardReadOne(boardUpdateDTO.getBno());
-
-        // DTO -> Entity
-        Board board = new Board();
-        board.dtoTOEntity(boardDTO);
-
-        boardUpdateDTO.boardUpdate(board);
         boardService.boardUpdate(boardUpdateDTO);
 
         // Then

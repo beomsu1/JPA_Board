@@ -1,4 +1,4 @@
-package org.bs.jpa.service;
+package org.bs.jpa.service.Impl;
 
 import java.util.Optional;
 
@@ -8,6 +8,7 @@ import org.bs.jpa.dto.board.BoardDTO;
 import org.bs.jpa.dto.board.BoardListDTO;
 import org.bs.jpa.dto.board.BoardUpdateDTO;
 import org.bs.jpa.repository.BoardRepository;
+import org.bs.jpa.service.BoardService;
 import org.bs.jpa.util.Page.PageRequestDTO;
 import org.bs.jpa.util.Page.PageResponseDTO;
 import org.springframework.stereotype.Service;
