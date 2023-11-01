@@ -39,7 +39,7 @@ public class CommentRepositoryTests {
 
         CommentCreateDTO commentCreateDTO = CommentCreateDTO.builder()
                 .bno(1L)
-                .commnets("댓글 테스트")
+                .comments("댓글 테스트")
                 .commenter("작성자1")
                 .build();
 
@@ -49,7 +49,7 @@ public class CommentRepositoryTests {
         // When
         Comment comment = Comment.builder()
                 .board(board)
-                .comments(commentCreateDTO.getCommnets())
+                .comments(commentCreateDTO.getComments())
                 .commenter(commentCreateDTO.getCommenter())
                 .build();
 

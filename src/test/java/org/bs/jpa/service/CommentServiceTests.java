@@ -33,13 +33,13 @@ public class CommentServiceTests {
         // Given
         log.info("Comment Create Service Test Start");
 
-        Long bno = 1L;
+        Long bno = 6L;
         String comments = "댓글 생성 서비스 테스트";
         String commenter = "작성자 테스트";
 
         CommentCreateDTO commentCreateDTO = CommentCreateDTO.builder()
                 .bno(bno)
-                .commnets(comments)
+                .comments(comments)
                 .commenter(commenter)
                 .build();
 
@@ -48,7 +48,7 @@ public class CommentServiceTests {
 
         // Then
         assertEquals(bno, commentCreateDTO.getBno());
-        assertEquals(comments, commentCreateDTO.getCommnets());
+        assertEquals(comments, commentCreateDTO.getComments());
         assertEquals(commenter, commentCreateDTO.getCommenter());
 
         log.info("Comment Create Service Test Complete");
