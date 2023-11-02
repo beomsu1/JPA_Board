@@ -4,17 +4,23 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.bs.jpa.dto.board.BoardDTO;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -30,7 +36,7 @@ import lombok.ToString;
 @NoArgsConstructor // 매개변수 없는 기본 생성자가 생성
 @Builder
 @Getter
-@ToString
+@ToString(exclude = "files")
 @EntityListeners(AuditingEntityListener.class) // 생명주기 이벤트를 리스닝하기 위해 사용
 public class Board {
 
@@ -46,6 +52,12 @@ public class Board {
 
     @LastModifiedDate // 수정시간 기준
     private String modDate;
+
+    // FileUpload
+    @Builder.Default
+    @JoinColumn(name = "board")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Fileupload> files = new ArrayList<>();
 
     // 생성 시간 포맷 변경
     @PrePersist
@@ -99,6 +111,14 @@ public class Board {
         this.regDate = boardDTO.getRegDate();
         this.modDate = boardDTO.getModDate();
 
+    }
+
+    // image 저장
+    public void imageSave(Fileupload fileupload){
+
+        fileupload.ordRefresh(files.size());
+
+        files.add(fileupload);
     }
 
 }
