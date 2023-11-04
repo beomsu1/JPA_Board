@@ -1,6 +1,10 @@
 package org.bs.jpa.dto.board;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bs.jpa.domain.Board;
+import org.bs.jpa.domain.Fileupload;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,6 +20,9 @@ public class BoardCreateDTO {
     private String title;
     private String content;
     private String writer;
+
+    @Builder.Default
+    private List<Fileupload> files = new ArrayList<>();
     
     // DTO -> Entity
     public Board toEntity(){

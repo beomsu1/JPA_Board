@@ -30,7 +30,7 @@ public class BoardRepositoryTests {
     // BoardCreate
     @Test
     @DisplayName("게시판 등록")
-    public void boardCreateTest() {
+    public void boardCreateRepositoryTest() {
 
         // Given
         log.info("board Create Repository Test Start");
@@ -53,7 +53,7 @@ public class BoardRepositoryTests {
     // BoardRead
     @Test
     @DisplayName("게시판 조회")
-    public void boardReadTest() {
+    public void boardReadRepositoryTest() {
 
         // Given
         log.info("board Read Repository Test Start");
@@ -72,7 +72,7 @@ public class BoardRepositoryTests {
     // BoardUpdate
     @Test
     @DisplayName("게시판 수정")
-    public void boardUpdateTest() {
+    public void boardUpdateRepositoryTest() {
 
         // given
         log.info("board Update Repository Test Start");
@@ -106,7 +106,7 @@ public class BoardRepositoryTests {
     // BoardDelete
     @Test
     @DisplayName("게시판 삭제")
-    public void boardDeleteTest() {
+    public void boardDeleteRepositoryTest() {
 
         // Given
         log.info("board Delete Repository Test Start");
@@ -124,7 +124,7 @@ public class BoardRepositoryTests {
     // BoardList
     @Test
     @DisplayName("게시판 리스트")
-    public void boardListTest() {
+    public void boardListRepositoryTest() {
 
         // Given
         log.info("board List Repository Test Start");
