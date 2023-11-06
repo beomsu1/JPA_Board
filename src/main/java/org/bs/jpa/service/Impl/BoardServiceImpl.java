@@ -1,5 +1,6 @@
 package org.bs.jpa.service.Impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.bs.jpa.domain.Board;
@@ -28,7 +29,19 @@ public class BoardServiceImpl implements BoardService{
     public void boardCreate(BoardCreateDTO boardCreateDTO) {
 
         log.info("boardCreate ServiceImpl....");
-        boardRepository.save(boardCreateDTO.toEntity());
+
+        Board board = Board.builder()
+        .title(boardCreateDTO.getTitle())
+        .content(boardCreateDTO.getContent())
+        .writer(boardCreateDTO.getWriter())
+        .build();
+
+        // files를 board에 filesave
+        boardCreateDTO.getFiles().forEach(file -> {
+            board.fileSave(file);
+        });
+
+        boardRepository.save(board);
     }
 
     // Read
@@ -58,7 +71,10 @@ public class BoardServiceImpl implements BoardService{
         Optional<Board> info =  boardRepository.findById(boardUpdateDTO.getBno());
         Board board = info.orElseThrow();
 
-        boardUpdateDTO.boardUpdate(board);
+        board.update(boardUpdateDTO);
+
+        List<String> existingFile = 
+        
         boardRepository.save(board);
 
     }

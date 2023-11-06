@@ -4,8 +4,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.bs.jpa.dto.board.BoardDTO;
+import org.bs.jpa.dto.board.BoardUpdateDTO;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -92,10 +94,10 @@ public class Board {
     }
 
     // Board Update Method
-    public void update(String title, String content) {
+    public void update(BoardUpdateDTO boardUpdateDTO) {
 
-        this.title = title;
-        this.content = content;
+        this.title = boardUpdateDTO.getTitle();
+        this.content = boardUpdateDTO.getContent();
 
     }
 
@@ -112,7 +114,12 @@ public class Board {
     }
 
     // file 저장
-    public void fileSave(Fileupload fileupload){
+    public void fileSave(String fname){
+
+        Fileupload fileupload = Fileupload.builder()
+        .uuid(UUID.randomUUID().toString())
+        .fname(fname)
+        .build();
 
         fileupload.ordRefresh(files.size());
 

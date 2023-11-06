@@ -1,6 +1,7 @@
 package org.bs.jpa.dto.board;
 
-import org.bs.jpa.domain.Board;
+import java.util.ArrayList;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,10 +18,7 @@ public class BoardUpdateDTO {
     private String title;
     private String content;
 
-    public void boardUpdate(Board board){
-
-        board.update(title, content);
-    }
-
+    @Builder.Default
+    private List<String> files = new ArrayList<>();
 
 }

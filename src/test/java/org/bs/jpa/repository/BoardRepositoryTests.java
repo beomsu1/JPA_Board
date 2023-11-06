@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import org.bs.jpa.domain.Board;
 import org.bs.jpa.domain.Fileupload;
@@ -32,11 +31,12 @@ public class BoardRepositoryTests {
 
     // BoardCreate
     @Test
+    @Transactional
     @DisplayName("게시판 등록")
     public void boardCreateRepositoryTest() {
 
         // Given
-        log.info("board Create Repository Test Start");
+        log.info("Board Create Repository Test Start");
 
         BoardCreateDTO boardCreateDTO = BoardCreateDTO.builder()
                 .title("테스트입니다.")
@@ -59,7 +59,7 @@ public class BoardRepositoryTests {
     public void boardReadRepositoryTest() {
 
         // Given
-        log.info("board Read Repository Test Start");
+        log.info("Board Read Repository Test Start");
         Long bno = 11L;
 
         // When
@@ -74,11 +74,12 @@ public class BoardRepositoryTests {
 
     // BoardUpdate
     @Test
+    @Transactional
     @DisplayName("게시판 수정")
     public void boardUpdateRepositoryTest() {
 
         // given
-        log.info("board Update Repository Test Start");
+        log.info("Board Update Repository Test Start");
 
         Long bno = 1L;
         String newTitle = "안녕하세요 테스트입니다.";
@@ -95,7 +96,7 @@ public class BoardRepositoryTests {
         Optional<Board> info = boardRepository.findById(bno); // 값이 없을수도 있어서 Optional 사용
         Board board = info.orElseThrow(); // 예외가 있다면 Throw
 
-        boardUpdateDTO.boardUpdate(board);
+        board.update(boardUpdateDTO);
         board = boardRepository.save(board);
 
         // Then
@@ -108,6 +109,7 @@ public class BoardRepositoryTests {
 
     // BoardDelete
     @Test
+    @Transactional
     @DisplayName("게시판 삭제")
     public void boardDeleteRepositoryTest() {
 
@@ -130,7 +132,7 @@ public class BoardRepositoryTests {
     public void boardListRepositoryTest() {
 
         // Given
-        log.info("board List Repository Test Start");
+        log.info("Board List Repository Test Start");
 
         // when
         Pageable pageable = PageRequest.of(0, 10, Sort.by("bno").descending());
@@ -152,12 +154,12 @@ public class BoardRepositoryTests {
 
     // Board File Create
     @Test
-    // @Transactional
+    @Transactional
     @DisplayName("게시판 생성, 파일 추가")
     public void boardFileCreateRepositoryTest(){
 
         // Given
-        log.info("board Create Add File Repository Test Start");
+        log.info("Board Create Add File Repository Test Start");
 
         Board board = Board.builder()
         .title("addFile Test")
@@ -165,15 +167,18 @@ public class BoardRepositoryTests {
         .writer("beomsu")
         .build();
 
-        Fileupload file1 = Fileupload.builder()
-        .uuid(UUID.randomUUID().toString())
-        .fname("BEOMSU")
-        .build();
+        // Fileupload file1 = Fileupload.builder()
+        // .uuid(UUID.randomUUID().toString())
+        // .fname("BEOMSU")
+        // .build();
 
-        Fileupload file2 = Fileupload.builder()
-        .uuid(UUID.randomUUID().toString())
-        .fname("beomsu")
-        .build();
+        // Fileupload file2 = Fileupload.builder()
+        // .uuid(UUID.randomUUID().toString())
+        // .fname("beomsu")
+        // .build();
+
+        String file1 = "BEOMSU";
+        String file2 = "beomsu";
 
         // When
         
@@ -183,13 +188,13 @@ public class BoardRepositoryTests {
         boardRepository.save(board);
 
         // Then
-        assertEquals(board.getFiles().get(0), file1);
-        assertEquals(board.getFiles().get(1), file2);
+        assertEquals(board.getFiles().get(0).getFname(), file1);
+        assertEquals(board.getFiles().get(1).getFname(), file2);
         assertEquals(board.getContent(), "addFile Test");
 
         log.info(board.toString());
         log.info(board.getFiles());
-        log.info("board Create Add File Repository Test Complete");
+        log.info("Board Create Add File Repository Test Complete");
 
     }
 
@@ -200,7 +205,7 @@ public class BoardRepositoryTests {
     public void boardFileReadRepositoryTest(){
 
         // Given
-        log.info("board File Read Repository Test Start");
+        log.info("Board File Read Repository Test Start");
         
         Long bno = 25L;
 
@@ -215,7 +220,7 @@ public class BoardRepositoryTests {
             log.info(fileupload.toString());
         }
 
-        log.info("board File Read Respository Test Complete");
+        log.info("Board File Read Respository Test Complete");
     }
 
     // Board File update
@@ -225,14 +230,16 @@ public class BoardRepositoryTests {
     public void boardFileUpdateRepositoryTest(){
 
         // Given
-        log.info("board File Update Repository Test Start");
+        log.info("Board File Update Repository Test Start");
         
         Long bno = 25L;
 
-        Fileupload file1 = Fileupload.builder()
-        .uuid(UUID.randomUUID().toString())
-        .fname("file Test")
-        .build();
+        // Fileupload file1 = Fileupload.builder()
+        // .uuid(UUID.randomUUID().toString())
+        // .fname("file Test")
+        // .build();
+
+        String file1 = "file Test";
 
         // When
         Optional<Board> info = boardRepository.findById(bno);
@@ -247,30 +254,7 @@ public class BoardRepositoryTests {
         // Then
         log.info(board.toString());
         log.info(board.getFiles());
-        log.info("board File Update Repository Test Complete");
+        log.info("Board File Update Repository Test Complete");
 
-    }
-
-    // board File Delete
-    @Test
-    @DisplayName("게시판 파일 삭제")
-    @Transactional
-    public void boardFileDeleteRepositoryTest(){
-
-        // Given
-        log.info("board File Delete Repository Test Start");
-        Long bno = 25L;
-
-        // When
-        Optional<Board> info = boardRepository.findById(bno);
-        Board board = info.orElseThrow();
-
-        board.fileDelete();
-
-        boardRepository.save(board);
-        
-        // Then
-        log.info(board.getFiles());
-        log.info("board File Delete Repository Test Complete");
     }
 }

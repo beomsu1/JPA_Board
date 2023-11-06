@@ -1,6 +1,10 @@
 package org.bs.jpa.dto.board;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bs.jpa.domain.Board;
+import org.bs.jpa.domain.Fileupload;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,6 +24,9 @@ public class BoardDTO {
     private String regDate;
     private String modDate;
 
+    @Builder.Default
+    private List<Fileupload> files = new ArrayList<>();
+
     // Board(Entity) -> BoardDTO 
     public void BoardToBoardDTO(Board board){
 
@@ -29,6 +36,7 @@ public class BoardDTO {
         this.writer = board.getWriter();
         this.regDate = board.getRegDate();
         this.modDate = board.getModDate();
+        this.files = board.getFiles();
     }
 
 }
