@@ -10,7 +10,6 @@ import org.bs.jpa.dto.comment.CommentCreateDTO;
 import org.bs.jpa.dto.comment.CommentDTO;
 import org.bs.jpa.dto.comment.CommentUpdateDTO;
 import org.bs.jpa.dto.comment.CommnetListDTO;
-import org.bs.jpa.repository.BoardRepository;
 import org.bs.jpa.repository.CommentRepository;
 import org.bs.jpa.service.CommentService;
 import org.bs.jpa.util.Page.PageRequestDTO;

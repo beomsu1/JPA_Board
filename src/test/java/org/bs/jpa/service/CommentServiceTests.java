@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 
-import org.bs.jpa.domain.Comment;
 import org.bs.jpa.dto.comment.CommentCreateDTO;
 import org.bs.jpa.dto.comment.CommentDTO;
 import org.bs.jpa.dto.comment.CommentUpdateDTO;
