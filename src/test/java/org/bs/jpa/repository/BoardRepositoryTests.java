@@ -5,8 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.bs.jpa.domain.Board;
+import org.bs.jpa.domain.Fileupload;
 import org.bs.jpa.dto.board.BoardCreateDTO;
 import org.bs.jpa.dto.board.BoardUpdateDTO;
 import org.junit.jupiter.api.DisplayName;
@@ -18,6 +20,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
+import jakarta.transaction.Transactional;
 import lombok.extern.log4j.Log4j2;
 
 @SpringBootTest
@@ -146,4 +149,128 @@ public class BoardRepositoryTests {
         log.info("Board List Repository Test Complete");
     }
 
+
+    // Board File Create
+    @Test
+    // @Transactional
+    @DisplayName("게시판 생성, 파일 추가")
+    public void boardFileCreateRepositoryTest(){
+
+        // Given
+        log.info("board Create Add File Repository Test Start");
+
+        Board board = Board.builder()
+        .title("addFile Test")
+        .content("addFile Test")
+        .writer("beomsu")
+        .build();
+
+        Fileupload file1 = Fileupload.builder()
+        .uuid(UUID.randomUUID().toString())
+        .fname("BEOMSU")
+        .build();
+
+        Fileupload file2 = Fileupload.builder()
+        .uuid(UUID.randomUUID().toString())
+        .fname("beomsu")
+        .build();
+
+        // When
+        
+        board.fileSave(file1);
+        board.fileSave(file2);
+
+        boardRepository.save(board);
+
+        // Then
+        assertEquals(board.getFiles().get(0), file1);
+        assertEquals(board.getFiles().get(1), file2);
+        assertEquals(board.getContent(), "addFile Test");
+
+        log.info(board.toString());
+        log.info(board.getFiles());
+        log.info("board Create Add File Repository Test Complete");
+
+    }
+
+    // Board File Read
+    @Test
+    @DisplayName("게시판 파일 조회")
+    @Transactional
+    public void boardFileReadRepositoryTest(){
+
+        // Given
+        log.info("board File Read Repository Test Start");
+        
+        Long bno = 25L;
+
+        // When
+        Optional<Board> info = boardRepository.findById(bno);
+        Board board = info.orElseThrow();
+
+        List<Fileupload> list = board.getFiles();
+
+        // Then
+        for (Fileupload fileupload : list) {
+            log.info(fileupload.toString());
+        }
+
+        log.info("board File Read Respository Test Complete");
+    }
+
+    // Board File update
+    @Test
+    @DisplayName("게시판 파일 수정")
+    @Transactional
+    public void boardFileUpdateRepositoryTest(){
+
+        // Given
+        log.info("board File Update Repository Test Start");
+        
+        Long bno = 25L;
+
+        Fileupload file1 = Fileupload.builder()
+        .uuid(UUID.randomUUID().toString())
+        .fname("file Test")
+        .build();
+
+        // When
+        Optional<Board> info = boardRepository.findById(bno);
+        Board board = info.orElseThrow();
+
+        board.fileDelete();
+
+        board.fileSave(file1);
+
+        boardRepository.save(board);
+
+        // Then
+        log.info(board.toString());
+        log.info(board.getFiles());
+        log.info("board File Update Repository Test Complete");
+
+    }
+
+    // board File Delete
+    @Test
+    @DisplayName("게시판 파일 삭제")
+    @Transactional
+    public void boardFileDeleteRepositoryTest(){
+
+        // Given
+        log.info("board File Delete Repository Test Start");
+        Long bno = 25L;
+
+        // When
+        Optional<Board> info = boardRepository.findById(bno);
+        Board board = info.orElseThrow();
+
+        board.fileDelete();
+
+        boardRepository.save(board);
+        
+        // Then
+        log.info(board.getFiles());
+        log.info("board File Delete Repository Test Complete");
+    }
 }

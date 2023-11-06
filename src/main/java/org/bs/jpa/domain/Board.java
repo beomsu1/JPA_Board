@@ -17,6 +17,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
@@ -52,7 +53,8 @@ public class Board {
 
     // FileUpload
     @Builder.Default
-    @OneToMany(mappedBy = "board" ,cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "board_bno")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Fileupload> files = new ArrayList<>();
 
     // 생성 시간 포맷 변경
@@ -109,12 +111,17 @@ public class Board {
 
     }
 
-    // image 저장
-    public void imageSave(Fileupload fileupload){
+    // file 저장
+    public void fileSave(Fileupload fileupload){
 
         fileupload.ordRefresh(files.size());
 
         files.add(fileupload);
+    }
+
+    // file 삭제
+    public void fileDelete(){
+        files.clear();
     }
 
 }
