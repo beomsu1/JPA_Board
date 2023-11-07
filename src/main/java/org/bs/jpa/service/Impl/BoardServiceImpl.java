@@ -85,6 +85,8 @@ public class BoardServiceImpl implements BoardService {
 
         List<String> existingFile = board.getFiles().stream().map(file -> file.getFname()).collect(Collectors.toList());
 
+        log.info("existingFile: " + existingFile);
+
         log.info("----------111111111111111"+ board.getFiles());
 
         board.fileClear();
@@ -103,10 +105,10 @@ public class BoardServiceImpl implements BoardService {
                 .filter(file -> !newFile.contains(file))
                 .collect(Collectors.toList());
                 
-        log.info(newFile);
+        log.info("newFile:" + newFile);
 
         log.info("-------------------------------");
-        log.info(deleteFile);
+        log.info("deleteFile: " + deleteFile);
 
         log.info("-------------------------------");
 
