@@ -245,7 +245,7 @@ public class BoardRepositoryTests {
         Optional<Board> info = boardRepository.findById(bno);
         Board board = info.orElseThrow();
 
-        board.fileDelete();
+        board.fileClear();
 
         board.fileSave(file1);
 
