@@ -102,12 +102,15 @@ public class BoardServiceImpl implements BoardService {
         List<String> deleteFile = existingFile.stream()
                 .filter(file -> !newFile.contains(file))
                 .collect(Collectors.toList());
+                
+        log.info(newFile);
 
         log.info("-------------------------------");
         log.info(deleteFile);
 
         log.info("-------------------------------");
 
+        fileuploadUtil.dbFileDelete(deleteFile);
         fileuploadUtil.delete(deleteFile);
 
         boardRepository.save(board);

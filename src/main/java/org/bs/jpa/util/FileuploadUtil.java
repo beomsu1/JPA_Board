@@ -7,7 +7,6 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.FileCopyUtils;
@@ -16,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
+import jakarta.transaction.Transactional;
 import net.coobird.thumbnailator.Thumbnailator;
 
 @Component
@@ -55,7 +55,6 @@ public class FileuploadUtil {
 
                 File thumbFile = new File(path + File.separator + "s_" + originalFileName);
 
-
                 Thumbnailator.createThumbnail(saveFile, thumbFile, 200, 200);
 
                 uploadFnames.add(originalFileName);
@@ -93,14 +92,18 @@ public class FileuploadUtil {
     private EntityManager entityManager;
 
     // db file delete
-    public void dbFileDelete(String fname){
+    @Transactional
+    public void dbFileDelete(List<String> fnames) {
 
         try {
             String sql = "DELETE FROM bs_board_file WHERE fname = :fname AND board_bno IS NULL";
             Query query = entityManager.createNativeQuery(sql);
-            query.setParameter("fname", fname);
-            query.executeUpdate();
-            
+
+            for (String fname : fnames) {
+                query.setParameter("fname", fname);
+                query.executeUpdate();  
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
