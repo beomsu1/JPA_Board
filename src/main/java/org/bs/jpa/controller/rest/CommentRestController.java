@@ -58,7 +58,7 @@ public class CommentRestController {
 
     // Comment Update
     @PutMapping("{cno}")
-    public String commentUpdate (CommentUpdateDTO commentUpdateDTO){
+    public String commentUpdate (@RequestBody CommentUpdateDTO commentUpdateDTO){
 
         log.info("Comment Update Controller Start");
 
