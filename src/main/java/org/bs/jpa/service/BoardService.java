@@ -1,5 +1,6 @@
 package org.bs.jpa.service;
 
+import org.bs.jpa.domain.Board;
 import org.bs.jpa.dto.board.BoardCreateDTO;
 import org.bs.jpa.dto.board.BoardDTO;
 import org.bs.jpa.dto.board.BoardListDTO;
@@ -19,7 +20,7 @@ public interface BoardService {
     BoardDTO boardReadOne (Long bno);
 
     // Update
-    void boardUpdate (BoardUpdateDTO boardUpdateDTO);
+    Board boardUpdate (BoardUpdateDTO boardUpdateDTO);
 
     // Delete
     void boardDelete (Long bno);

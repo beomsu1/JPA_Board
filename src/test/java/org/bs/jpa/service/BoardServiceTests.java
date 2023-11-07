@@ -2,6 +2,7 @@ package org.bs.jpa.service;
 
 import java.util.List;
 
+import org.bs.jpa.domain.Board;
 import org.bs.jpa.dto.board.BoardCreateDTO;
 import org.bs.jpa.dto.board.BoardDTO;
 import org.bs.jpa.dto.board.BoardListDTO;
@@ -49,12 +50,13 @@ public class BoardServiceTests {
     // Read
     @Test
     @DisplayName("게시물 조회 서비스")
+    @Transactional
     public void boardReadServiceTest() {
 
         // Given
         log.info("Board Read Service Test Start");
 
-        Long bno = 1L;
+        Long bno = 29L;
 
         // When
         BoardDTO boardDTO = boardService.boardReadOne(bno);
@@ -181,10 +183,19 @@ public class BoardServiceTests {
         // Given
         log.info("Board File Update Service Test Start");
 
-        
+        BoardUpdateDTO boardUpdateDTO = BoardUpdateDTO.builder()
+        .bno(29L)
+        .title("update Title")
+        .content("update Content")
+        .files(List.of("update file1","update file2","new file1"))
+        .build();
 
         // When
+        Board board = boardService.boardUpdate(boardUpdateDTO);
 
         // Then
+        log.info(board.toString());
+        log.info(board.getFiles());
+        log.info("Board File Update Service Test Complete");
     }
 }
