@@ -42,6 +42,9 @@ dependencies {
 	testCompileOnly 'org.projectlombok:lombok'
 	testAnnotationProcessor 'org.projectlombok:lombok'
 
+	// 썸네일
+	implementation 'net.coobird:thumbnailator:0.4.19'
+
 	// queryDsl
 	implementation "com.querydsl:querydsl-jpa:${queryDslVersion}:jakarta"
 
