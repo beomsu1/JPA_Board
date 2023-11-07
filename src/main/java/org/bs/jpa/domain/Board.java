@@ -113,7 +113,7 @@ public class Board {
 
     }
 
-    // file 저장
+    // file save
     public void fileSave(String fname){
 
         Fileupload fileupload = Fileupload.builder()
@@ -126,8 +126,8 @@ public class Board {
         files.add(fileupload);
     }
 
-    // file 삭제
-    public void fileDelete(){
+    // file clear
+    public void fileClear(){
         files.clear();
     }
 
