@@ -26,7 +26,7 @@ public class CommentServiceTests {
 
     // Comment Create
     @Test
-    @DisplayName("댓글 생성 테스트")
+    @DisplayName("댓글 생성 서비스 테스트")
     public void commentCreateServiceTest() {
 
         // Given
@@ -55,7 +55,7 @@ public class CommentServiceTests {
 
     // Comment ReadOne
     @Test
-    @DisplayName("댓글 조회 테스트")
+    @DisplayName("댓글 조회 서비스 테스트")
     public void CommentReadOneServiceTest(){
 
         // Given
@@ -73,7 +73,7 @@ public class CommentServiceTests {
 
     // Comment Update
     @Test
-    @DisplayName("댓글 수정 테스트")
+    @DisplayName("댓글 수정 서비스 테스트")
     public void commentUpdateServiceTest(){
 
         // Given
@@ -102,7 +102,7 @@ public class CommentServiceTests {
 
     // Comment Delete
     @Test
-    @DisplayName("댓글 삭제 테스트")
+    @DisplayName("댓글 삭제 서비스 테스트")
     public void commentDeleteServiceTest(){
 
         // Given
@@ -119,7 +119,7 @@ public class CommentServiceTests {
 
     // Commenet List
     @Test
-    @DisplayName("댓글 목록 테스트")
+    @DisplayName("댓글 목록 서비스 테스트")
     public void commnetListServiceTest(){
 
         // Given

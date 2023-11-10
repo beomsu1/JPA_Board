@@ -32,7 +32,7 @@ public class BoardRepositoryTests {
     // BoardCreate
     @Test
     @Transactional
-    @DisplayName("게시판 등록")
+    @DisplayName("게시판 등록 테스트")
     public void boardCreateRepositoryTest() {
 
         // Given
@@ -55,7 +55,7 @@ public class BoardRepositoryTests {
 
     // BoardRead
     @Test
-    @DisplayName("게시판 조회")
+    @DisplayName("게시판 조회 테스트")
     public void boardReadRepositoryTest() {
 
         // Given
@@ -75,7 +75,7 @@ public class BoardRepositoryTests {
     // BoardUpdate
     @Test
     @Transactional
-    @DisplayName("게시판 수정")
+    @DisplayName("게시판 수정 테스트")
     public void boardUpdateRepositoryTest() {
 
         // given
@@ -110,7 +110,7 @@ public class BoardRepositoryTests {
     // BoardDelete
     @Test
     @Transactional
-    @DisplayName("게시판 삭제")
+    @DisplayName("게시판 삭제 테스트")
     public void boardDeleteRepositoryTest() {
 
         // Given
@@ -128,7 +128,7 @@ public class BoardRepositoryTests {
 
     // BoardList
     @Test
-    @DisplayName("게시판 리스트")
+    @DisplayName("게시판 리스트 테스트")
     public void boardListRepositoryTest() {
 
         // Given
@@ -155,7 +155,7 @@ public class BoardRepositoryTests {
     // Board File Create
     @Test
     @Transactional
-    @DisplayName("게시판 생성, 파일 추가")
+    @DisplayName("게시판 생성, 파일 추가 테스트")
     public void boardFileCreateRepositoryTest(){
 
         // Given
@@ -200,7 +200,7 @@ public class BoardRepositoryTests {
 
     // Board File Read
     @Test
-    @DisplayName("게시판 파일 조회")
+    @DisplayName("게시판 파일 조회 테스트")
     @Transactional
     public void boardFileReadRepositoryTest(){
 
@@ -225,7 +225,7 @@ public class BoardRepositoryTests {
 
     // Board File update
     @Test
-    @DisplayName("게시판 파일 수정")
+    @DisplayName("게시판 파일 수정 테스트")
     @Transactional
     public void boardFileUpdateRepositoryTest(){
 
