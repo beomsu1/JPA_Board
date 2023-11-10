@@ -30,7 +30,7 @@ public class MemberSearchImpl extends QuerydslRepositorySupport implements Membe
 
         JPQLQuery<Member> query = from(member);
 
-        query.leftJoin(member).on(member.email.eq(role.member.email));
+        query.leftJoin(member.roles, role); // 양방향 매핑한 걸로 조인
 
         String type = pageRequestDTO.getType();
         String keyword = pageRequestDTO.getKeyword();
@@ -61,12 +61,12 @@ public class MemberSearchImpl extends QuerydslRepositorySupport implements Membe
         this.getQuerydsl().applyPagination(pageable, query);
 
         JPQLQuery<MemberListDTO> listQuery = query.select(Projections.bean(
-            MemberListDTO.class,
-            member.email,
-            member.nickname,
-            member.phoneNumber,
-            member.regDate,
-            member.roles));
+                MemberListDTO.class,
+                member.email,
+                member.nickname,
+                member.phoneNumber,
+                member.regDate,
+                role.role));
 
         List<MemberListDTO> dtoList = listQuery.fetch();
 
