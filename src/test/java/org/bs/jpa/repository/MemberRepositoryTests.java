@@ -13,6 +13,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import jakarta.transaction.Transactional;
@@ -46,7 +50,7 @@ public class MemberRepositoryTests {
 
         if (memberRepository.existsById(memberCreateDTO.getEmail())) {
             log.info("중복된 이메일 주소입니다");
-            return; 
+            return;
         }
 
         // When
@@ -163,6 +167,29 @@ public class MemberRepositoryTests {
         log.info("삭제 여부: " + member.isDeleteFlag());
 
         log.info("Member Delete Repository Test Complete");
+    }
+
+    // Member List
+    @Test
+    @DisplayName("회원 리스트")
+    @Transactional
+    public void memberListRepositoryTest() {
+
+        // Given
+        log.info("Member List Repository Test Start");
+
+        // When
+        Pageable pageable = PageRequest.of(0, 10, Sort.by("regDate").descending());
+        Page<Member> page = memberRepository.findAll(pageable);
+
+        // Then
+        List<Member> list = page.getContent();
+
+        log.info("page: " + page);
+        log.info("list: " + list);
+        list.get(0).getRoles().forEach(r -> log.info(r.getRole()));
+
+        log.info("Member List Repository Test Complete");
     }
 
 }

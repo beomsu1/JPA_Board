@@ -1,5 +1,6 @@
 package org.bs.jpa.dto.member;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,5 +22,6 @@ public class MemberListDTO {
 
     @Builder.Default
     private List<String> roles = new ArrayList<>();
-    
+
+
 }
