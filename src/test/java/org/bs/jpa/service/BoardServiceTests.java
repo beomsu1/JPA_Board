@@ -27,7 +27,7 @@ public class BoardServiceTests {
     // Create
     @Test
     @Transactional
-    @DisplayName("게시물 등록 서비스")
+    @DisplayName("게시물 등록 서비스 테스트")
     public void boardCreateServiceTest() {
 
         // Given

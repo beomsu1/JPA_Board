@@ -34,7 +34,7 @@ public class MemberRepositoryTests {
 
     // Member Create
     @Test
-    @DisplayName("회원 생성")
+    @DisplayName("회원 가입 테스트")
     @Transactional
     public void memberCreateRepositoryTest() {
 
@@ -91,7 +91,7 @@ public class MemberRepositoryTests {
 
     // Member Read
     @Test
-    @DisplayName("회원 조회")
+    @DisplayName("회원 조회 테스트")
     @Transactional
     public void memberReadRepositoryTest() {
 
@@ -117,7 +117,7 @@ public class MemberRepositoryTests {
 
     // Member Update
     @Test
-    @DisplayName("회원 수정")
+    @DisplayName("회원 수정 테스트")
     @Transactional
     public void memberUpdateRepositoryTest() {
 
@@ -147,7 +147,7 @@ public class MemberRepositoryTests {
 
     // Member Delete
     @Test
-    @DisplayName("회원 탈퇴")
+    @DisplayName("회원 탈퇴 테스트")
     @Transactional
     public void memberDeleteRepositoryTest() {
 
