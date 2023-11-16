@@ -21,7 +21,7 @@ public class MemberDTO extends User {
 
         // SimpleGrantedAuthority -> 권한을 나타내는데 사용, 권한 부여
         super(email, password,
-                roles.stream().map(role -> new SimpleGrantedAuthority("ROLE_" + role)).collect(Collectors.toList()));
+                roles.stream().map(role -> new SimpleGrantedAuthority(role)).collect(Collectors.toList()));
 
         this.email = email;
         this.password = password;

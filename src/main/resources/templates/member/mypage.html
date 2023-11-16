@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Mypage</title>
+    </head>
+    
+    <body>
+        <div class="container-fluid pt-4 px-4" layout:fragment="content">
+            <div class="col-sm-12 col-xl-12">
+                <div class="bg-light rounded h-100 p-4">
+                    <h2 class="mb-4">Mypage</h2>
+    
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="text" class="form-control" id="email" th:value="${userDetails.email}" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="nickname" class="form-label">nickname</label>
+                        <input type="text" class="form-control" id="nickname" th:value="${userDetails.nickname}"
+                            readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="rolename" class="form-label">Role</label>
+                        <ul>
+                            <li th:each="authority : ${userDetails.authorities}" th:text="${#strings.substring(authority, 5)}"></li>
+                        </ul>
+                    </div>
+    
+                    <div class="button_wrap">
+                        <a href="/member/update" class="btn btn-primary modifyBtn">정보 수정</a>
+                    </div>
+                </div>
+            </div>
+    
+    
+    </body>
+</html>

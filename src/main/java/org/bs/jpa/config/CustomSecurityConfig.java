@@ -1,5 +1,6 @@
 package org.bs.jpa.config;
 
+import org.bs.jpa.security.handler.CustomAccessDeniedHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,9 +17,20 @@ public class CustomSecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+    @Bean
     public SecurityFilterChain filterChain(final HttpSecurity http) throws Exception {
 
-        http.formLogin(config -> config.loginPage("/member/login"));
+        // loginPage
+        http.formLogin(config -> config.loginPage("/member/login")
+
+                // 로그인 성공 시 mypage로 이동
+                .defaultSuccessUrl("/member/mypage", true));
+
+        // csrf 비활성화
+        http.csrf(config -> config.disable());
+
+        // AccessDenied
+        http.exceptionHandling(config -> config.accessDeniedHandler(new CustomAccessDeniedHandler("/member/login")));
 
         return http.build();
 

@@ -7,6 +7,8 @@ import org.bs.jpa.dto.board.BoardUpdateDTO;
 import org.bs.jpa.service.BoardService;
 import org.bs.jpa.util.Page.PageRequestDTO;
 import org.bs.jpa.util.Page.PageResponseDTO;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,12 +24,14 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 @RequiredArgsConstructor
 @RequestMapping("/board/")
+@EnableMethodSecurity
 public class BoardController {
     
     private final BoardService boardService;
 
     // List
     @GetMapping("list")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public void getBoardList(Model model, PageRequestDTO pageRequestDTO){
 
         log.info("GET | Board List Controller");
@@ -40,6 +44,7 @@ public class BoardController {
 
     // Get Create
     @GetMapping("create")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public void getBoardCreate(){
 
         log.info("GET : boardCreate");
@@ -47,6 +52,7 @@ public class BoardController {
 
     // Get Read
     @GetMapping("read/{bno}")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public String getBoardRead(@PathVariable("bno") Long bno, Model model){
 
         log.info("GET | Board Read Controller");
@@ -61,6 +67,7 @@ public class BoardController {
 
     // Get Update
     @GetMapping("update/{bno}")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public String getBoardUpdate(@PathVariable("bno") Long bno, Model model){
 
         log.info("GET | Board Update Controller");
@@ -75,6 +82,7 @@ public class BoardController {
 
     // Post Create
     @PostMapping("create")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public String postBoardCreate(BoardCreateDTO boardCreateDTO, RedirectAttributes attributes){
 
         log.info("POST | Board Create Controller");
@@ -89,6 +97,7 @@ public class BoardController {
 
     // Post Update
     @PostMapping("update")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public String postBoardUpdate(BoardUpdateDTO boardUpdateDTO, RedirectAttributes attributes){
 
         log.info("POST | Board Update Controller");
@@ -102,6 +111,7 @@ public class BoardController {
 
     //Post Delete
     @PostMapping("delete/{bno}")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public String postBoardDelete(@PathVariable("bno") Long bno, RedirectAttributes attributes){
 
         log.info("POST | Board Delete Controller");

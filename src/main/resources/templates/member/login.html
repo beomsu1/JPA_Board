@@ -1,11 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login Page</title>
+    <link rel="stylesheet" href="/css/loginPage.css">
 </head>
+
 <body>
-    
+    <div class="login-page">
+        <div class="form">
+            <form action="/member/login" method="post" class="login-form">
+                <input type="email" name="username" placeholder="email" />
+                <input type="password" name="password" placeholder="password" />
+                <label class="checkbox-container">
+                    <input type="checkbox" name="remember-me">
+                    <span class="checkmark"></span>
+                    Remember me
+                </label>
+                <button>login</button>
+                <a href="/oauth2/authorization/kakao" class="kakao">kakao Login</a>
+                <p class="message">Not registered? <a href="/member/signup">Create an account</a></p>
+            </form>
+        </div>
+    </div>
 </body>
+
 </html>
