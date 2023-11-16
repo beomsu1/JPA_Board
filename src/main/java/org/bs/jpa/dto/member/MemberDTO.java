@@ -4,35 +4,27 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.bs.jpa.domain.Member;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Data
-public class MemberDTO {
+public class MemberDTO extends User {
 
     private String email;
     private String password;
     private String nickname;
-    private String phoneNumber;
-    private String regDate;
-
-    @Builder.Default
     private List<String> roles = new ArrayList<>();
-    
-    public void entityToDTO(Member member){
-        this.email = member.getEmail();
-        this.password = member.getPassword();
-        this.nickname = member.getNickname();
-        this.phoneNumber = member.getPhoneNumber();
-        this.regDate = member.getRegDate();
-        this.roles = member.getRoles().stream().map(role -> role.getRole()).collect(Collectors.toList());
 
+    public MemberDTO(String email, String password, String nickname, List<String> roles) {
+
+        // SimpleGrantedAuthority -> 권한을 나타내는데 사용, 권한 부여
+        super(email, password,
+                roles.stream().map(role -> new SimpleGrantedAuthority("ROLE_" + role)).collect(Collectors.toList()));
+
+        this.email = email;
+        this.password = password;
+        this.nickname = nickname;
     }
 }

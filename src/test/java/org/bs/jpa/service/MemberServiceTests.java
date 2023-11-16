@@ -3,6 +3,7 @@ package org.bs.jpa.service;
 import org.bs.jpa.dto.member.MemberCreateDTO;
 import org.bs.jpa.dto.member.MemberDTO;
 import org.bs.jpa.dto.member.MemberListDTO;
+import org.bs.jpa.dto.member.MemberReadDTO;
 import org.bs.jpa.dto.member.MemberUpdateDTO;
 import org.bs.jpa.util.Page.PageRequestDTO;
 import org.bs.jpa.util.Page.PageResponseDTO;
@@ -55,10 +56,10 @@ public class MemberServiceTests {
         String email = "beomsu_1221@daum.net";
 
         // When
-        MemberDTO memberDTO = memberService.memberRead(email);
+        MemberReadDTO memberReadDTO = memberService.memberRead(email);
 
         // Then
-        log.info(memberDTO.toString());
+        log.info(memberReadDTO.toString());
         log.info("Member Read Service Test Complete");
     }
 

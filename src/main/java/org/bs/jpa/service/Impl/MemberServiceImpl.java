@@ -5,9 +5,10 @@ import java.util.Optional;
 import org.bs.jpa.domain.Member;
 import org.bs.jpa.domain.MemberRole;
 import org.bs.jpa.dto.member.MemberCreateDTO;
-import org.bs.jpa.dto.member.MemberDTO;
 import org.bs.jpa.dto.member.MemberListDTO;
+import org.bs.jpa.dto.member.MemberReadDTO;
 import org.bs.jpa.dto.member.MemberUpdateDTO;
+import org.bs.jpa.exception.EmailErrorException.emailError;
 import org.bs.jpa.repository.MemberRepository;
 import org.bs.jpa.service.MemberService;
 import org.bs.jpa.util.Page.PageRequestDTO;
@@ -27,13 +28,7 @@ public class MemberServiceImpl implements MemberService {
 
     private final PasswordEncoder passwordEncoder;
 
-    // 이메일  에러
-    public static class emailError extends RuntimeException {
 
-        public emailError(String msg) {
-            super(msg);
-        }
-    }
 
     // Member Create
     @Override
@@ -66,7 +61,7 @@ public class MemberServiceImpl implements MemberService {
 
     // Member Read
     @Override
-    public MemberDTO memberRead(String email) {
+    public MemberReadDTO memberRead(String email) {
 
         log.info("Member Read Service Start");
 
@@ -77,10 +72,10 @@ public class MemberServiceImpl implements MemberService {
             throw new emailError("삭제된 회원입니다.");
         }
 
-        MemberDTO memberDTO = new MemberDTO();
-        memberDTO.entityToDTO(member);
+        MemberReadDTO memberReadDTO = new MemberReadDTO();
+        memberReadDTO.entityToDTO(member);
 
-        return memberDTO;
+        return memberReadDTO;
 
     }
 
