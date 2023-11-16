@@ -1,7 +1,6 @@
 package org.bs.jpa.service;
 
 import org.bs.jpa.dto.member.MemberCreateDTO;
-import org.bs.jpa.dto.member.MemberDTO;
 import org.bs.jpa.dto.member.MemberListDTO;
 import org.bs.jpa.dto.member.MemberReadDTO;
 import org.bs.jpa.dto.member.MemberUpdateDTO;

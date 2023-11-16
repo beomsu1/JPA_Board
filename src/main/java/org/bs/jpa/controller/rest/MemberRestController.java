@@ -1,8 +1,8 @@
 package org.bs.jpa.controller.rest;
 
 import org.bs.jpa.dto.member.MemberCreateDTO;
-import org.bs.jpa.dto.member.MemberDTO;
 import org.bs.jpa.dto.member.MemberListDTO;
+import org.bs.jpa.dto.member.MemberReadDTO;
 import org.bs.jpa.dto.member.MemberUpdateDTO;
 import org.bs.jpa.service.MemberService;
 import org.bs.jpa.util.Page.PageRequestDTO;
@@ -48,7 +48,7 @@ public class MemberRestController {
 
     // Member Read
     @GetMapping("{email}")
-    MemberDTO memberRead(@PathVariable("email") String email) {
+    MemberReadDTO memberRead(@PathVariable("email") String email) {
 
         log.info("GET | Member Read Controller");
 
