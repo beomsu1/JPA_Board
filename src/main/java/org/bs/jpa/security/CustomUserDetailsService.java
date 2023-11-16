@@ -6,9 +6,11 @@ import java.util.stream.Collectors;
 import org.bs.jpa.domain.Member;
 import org.bs.jpa.dto.member.MemberDTO;
 import org.bs.jpa.repository.MemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;

@@ -3,6 +3,7 @@ package org.bs.jpa.config;
 import javax.sql.DataSource;
 
 import org.bs.jpa.security.handler.CustomAccessDeniedHandler;
+import org.bs.jpa.security.handler.CustomOAuthSuccessHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -57,6 +58,10 @@ public class CustomSecurityConfig {
         // rememberME
         http.rememberMe(
                 config -> config.tokenRepository(persistentTokenRepository()).tokenValiditySeconds(60 * 60 * 24));
+
+        // 소셜 로그인
+        http.oauth2Login(config -> config.loginPage("/member/login")
+                .successHandler(new CustomOAuthSuccessHandler()));
 
         return http.build();
 
