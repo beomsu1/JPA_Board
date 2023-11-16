@@ -55,7 +55,8 @@ public class CustomSecurityConfig {
         http.exceptionHandling(config -> config.accessDeniedHandler(new CustomAccessDeniedHandler("/member/login")));
 
         // rememberME
-        http.rememberMe(config -> config.tokenRepository(persistentTokenRepository()).tokenValiditySeconds(60*60*24));
+        http.rememberMe(
+                config -> config.tokenRepository(persistentTokenRepository()).tokenValiditySeconds(60 * 60 * 24));
 
         return http.build();
 

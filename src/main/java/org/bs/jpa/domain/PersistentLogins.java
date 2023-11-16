@@ -18,6 +18,7 @@ import lombok.NoArgsConstructor;
 @Getter
 public class PersistentLogins {
 
+    // 주의 : 컬럼명은 바뀌면 안 됨
     @Id
     private String series;
     private String username;
